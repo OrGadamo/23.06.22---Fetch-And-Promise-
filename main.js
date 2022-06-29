@@ -74,12 +74,32 @@ async function getResponse() {
 }
 //5,6
 async function getSpecificResponce() {
+  //no response
   try {
-    await fetch("http://cat-fact.herokuapp.com/facts").then((data) =>
-      console.log(data)
+    loading.innerHTML = "<img style='width:10vw' src='Loading_gif.gif' />";
+    cat_btn.disabled = true;
+    return await fetch("https://cat-fact.herokuapp.com/facts").then((res) =>
+      res.json()
     );
   } catch (error) {
     console.log(error);
+  } finally {
+    loading.innerHTML = "";
+    cat_btn.disabled = false;
   }
 }
-// getSpecificResponce();
+function printCatFact() {
+  getSpecificResponce().then((data) => console.log(data));
+}
+//9
+async function someFunc() {
+  try {
+    return await fetch("https://api.jikan.moe/v4/anime").then((res) =>
+      res.json()
+    );
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+}
+someFunc().then((data) => console.log(data));
